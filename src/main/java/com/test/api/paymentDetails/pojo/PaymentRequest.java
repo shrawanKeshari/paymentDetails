@@ -2,32 +2,43 @@ package com.test.api.paymentDetails.pojo;
 
 public class PaymentRequest {
 
-	private int userId;
-	private String itemId;
-	private double discount;
+	private Request request;
 
-	public int getUserId() {
-		return userId;
+	public Request getRequest() {
+		return request;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setRequest(Request request) {
+		this.request = request;
 	}
 
-	public String getItemId() {
-		return itemId;
-	}
+	public static class Request {
+		private int userId;
+		private String itemId;
+		private double discount;
 
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
+		public int getUserId() {
+			return userId;
+		}
 
-	public double getDiscount() {
-		return discount;
-	}
+		public void setUserId(int userId) {
+			this.userId = userId;
+		}
 
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
+		public String getItemId() {
+			return itemId;
+		}
 
+		public void setItemId(String itemId) {
+			this.itemId = itemId;
+		}
+
+		public double getDiscount() {
+			return discount;
+		}
+
+		public void setDiscount(double discount) {
+			this.discount = discount;
+		}
+	}
 }

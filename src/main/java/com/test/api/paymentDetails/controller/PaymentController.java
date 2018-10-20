@@ -12,6 +12,7 @@ import com.test.api.paymentDetails.beans.PaymentDetails;
 import com.test.api.paymentDetails.dao.detailsDao;
 import com.test.api.paymentDetails.pojo.PaymentRequest;
 import com.test.api.paymentDetails.pojo.PaymentResponse;
+import com.test.api.paymentDetails.pojo.PaymentResponse.Response;
 
 @Controller
 @RequestMapping(value = "/payment")
@@ -27,9 +28,12 @@ public class PaymentController {
 
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
 	public @ResponseBody PaymentResponse pay(@RequestBody PaymentRequest request) {
-		PaymentResponse response = new PaymentResponse();
-		int userId = request.getUserId();
-		String itemId = request.getItemId();
+		PaymentResponse paymentResponse = new PaymentResponse();
+		
+		Response response = new Response();
+		
+		int userId = request.getRequest().getUserId();
+		String itemId = request.getRequest().getItemId();
 		try {
 			PaymentDetails paymentDetails = paymentDetailsDao.getItemIdUSerId(userId, itemId);
 
@@ -43,35 +47,41 @@ public class PaymentController {
 			response.setStatus(FAILURE_STATUS);
 			response.setCode(CODE_FAILURE);
 		}
+		
+		paymentResponse.setResponse(response);
 
-		return response;
+		return paymentResponse;
 	}
 
 	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
 	public @ResponseBody PaymentResponse addItem(@RequestBody PaymentRequest request) {
 		PaymentResponse paymentResponse = new PaymentResponse();
-
+		
+		Response response = new Response();
+		
 		try {
 
 			PaymentDetails paymentDetails = new PaymentDetails();
-			paymentDetails.setUserId(request.getUserId());
-			paymentDetails.setItemId(request.getItemId());
-			paymentDetails.setDiscount(request.getDiscount());
+			paymentDetails.setUserId(request.getRequest().getUserId());
+			paymentDetails.setItemId(request.getRequest().getItemId());
+			paymentDetails.setDiscount(request.getRequest().getDiscount());
 			paymentDetails.setCurrency("INR");
 
 			paymentDetailsDao.insertData(paymentDetails);
 
-			paymentResponse.setStatus(SUCCESS_STATUS);
-			paymentResponse.setCode(CODE_SUCCESS);
-			paymentResponse.setUserId(paymentDetails.getUserId());
-			paymentResponse.setItemId(paymentDetails.getItemId());
-			paymentResponse.setDiscount(paymentDetails.getDiscount());
-			paymentResponse.setCurrency(paymentDetails.getCurrency());
+			response.setStatus(SUCCESS_STATUS);
+			response.setCode(CODE_SUCCESS);
+			response.setUserId(paymentDetails.getUserId());
+			response.setItemId(paymentDetails.getItemId());
+			response.setDiscount(paymentDetails.getDiscount());
+			response.setCurrency(paymentDetails.getCurrency());
 		} catch (Exception e) {
-			paymentResponse.setStatus(FAILURE_STATUS);
-			paymentResponse.setCode(CODE_FAILURE);
+			response.setStatus(FAILURE_STATUS);
+			response.setCode(CODE_FAILURE);
 		}
-
+		
+		paymentResponse.setResponse(response);
+		
 		return paymentResponse;
 	}
 
@@ -79,15 +89,19 @@ public class PaymentController {
 	public @ResponseBody PaymentResponse deleteItem(@RequestParam(value = "userId") int userId) {
 		PaymentResponse paymentResponse = new PaymentResponse();
 
+		Response response = new Response();
+		
 		try {
 			paymentDetailsDao.delete(userId);
 
-			paymentResponse.setStatus(SUCCESS_STATUS);
-			paymentResponse.setCode(CODE_SUCCESS);
+			response.setStatus(SUCCESS_STATUS);
+			response.setCode(CODE_SUCCESS);
 		} catch (Exception e) {
-			paymentResponse.setStatus(FAILURE_STATUS);
-			paymentResponse.setCode(CODE_FAILURE);
+			response.setStatus(FAILURE_STATUS);
+			response.setCode(CODE_FAILURE);
 		}
+		
+		paymentResponse.setResponse(response);
 
 		return paymentResponse;
 	}
@@ -95,26 +109,30 @@ public class PaymentController {
 	@RequestMapping(value = "/updateItem", method = RequestMethod.POST)
 	public @ResponseBody PaymentResponse updateItem(@RequestBody PaymentRequest request) {
 		PaymentResponse paymentResponse = new PaymentResponse();
+		
+		Response response = new Response();
 
 		try {
 
 			PaymentDetails paymentDetails = new PaymentDetails();
-			paymentDetails.setUserId(request.getUserId());
-			paymentDetails.setItemId(request.getItemId());
-			paymentDetails.setDiscount(request.getDiscount());
+			paymentDetails.setUserId(request.getRequest().getUserId());
+			paymentDetails.setItemId(request.getRequest().getItemId());
+			paymentDetails.setDiscount(request.getRequest().getDiscount());
 
 			paymentDetailsDao.updateData(paymentDetails);
 
-			paymentResponse.setStatus(SUCCESS_STATUS);
-			paymentResponse.setCode(CODE_SUCCESS);
-			paymentResponse.setUserId(paymentDetails.getUserId());
-			paymentResponse.setItemId(paymentDetails.getItemId());
-			paymentResponse.setDiscount(paymentDetails.getDiscount());
-			paymentResponse.setCurrency("INR");
+			response.setStatus(SUCCESS_STATUS);
+			response.setCode(CODE_SUCCESS);
+			response.setUserId(paymentDetails.getUserId());
+			response.setItemId(paymentDetails.getItemId());
+			response.setDiscount(paymentDetails.getDiscount());
+			response.setCurrency("INR");
 		} catch (Exception e) {
-			paymentResponse.setStatus(FAILURE_STATUS);
-			paymentResponse.setCode(CODE_FAILURE);
+			response.setStatus(FAILURE_STATUS);
+			response.setCode(CODE_FAILURE);
 		}
+		
+		paymentResponse.setResponse(response);
 
 		return paymentResponse;
 	}
