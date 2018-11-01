@@ -1,5 +1,7 @@
 package com.test.api.paymentDetails.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,25 +29,25 @@ public class PaymentController {
 	private static final String CODE_SUCCESS = "100";
 
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	public @ResponseBody PaymentResponse pay(@RequestBody PaymentRequest request) {
+	public @ResponseBody PaymentResponse pay(HttpServletRequest request) {
 		PaymentResponse paymentResponse = new PaymentResponse();
 		
 		Response response = new Response();
 		
-		int userId = request.getRequest().getUserId();
-		String itemId = request.getRequest().getItemId();
+		int userId = ((PaymentRequest) request).getRequest().getUserId();
+		String itemId = ((PaymentRequest) request).getRequest().getItemId();
 		try {
 			PaymentDetails paymentDetails = paymentDetailsDao.getItemIdUSerId(userId, itemId);
 
-			response.setStatus(SUCCESS_STATUS);
-			response.setCode(CODE_SUCCESS);
+			paymentResponse.setStatus(SUCCESS_STATUS);
+			paymentResponse.setCode(CODE_SUCCESS);
 			response.setUserId(paymentDetails.getUserId());
 			response.setItemId(paymentDetails.getItemId());
 			response.setDiscount(paymentDetails.getDiscount());
 			response.setCurrency(paymentDetails.getCurrency());
 		} catch (Exception e) {
-			response.setStatus(FAILURE_STATUS);
-			response.setCode(CODE_FAILURE);
+			paymentResponse.setStatus(FAILURE_STATUS);
+			paymentResponse.setCode(CODE_FAILURE);
 		}
 		
 		paymentResponse.setResponse(response);
@@ -69,15 +71,15 @@ public class PaymentController {
 
 			paymentDetailsDao.insertData(paymentDetails);
 
-			response.setStatus(SUCCESS_STATUS);
-			response.setCode(CODE_SUCCESS);
+			paymentResponse.setStatus(SUCCESS_STATUS);
+			paymentResponse.setCode(CODE_SUCCESS);
 			response.setUserId(paymentDetails.getUserId());
 			response.setItemId(paymentDetails.getItemId());
 			response.setDiscount(paymentDetails.getDiscount());
 			response.setCurrency(paymentDetails.getCurrency());
 		} catch (Exception e) {
-			response.setStatus(FAILURE_STATUS);
-			response.setCode(CODE_FAILURE);
+			paymentResponse.setStatus(FAILURE_STATUS);
+			paymentResponse.setCode(CODE_FAILURE);
 		}
 		
 		paymentResponse.setResponse(response);
@@ -94,11 +96,11 @@ public class PaymentController {
 		try {
 			paymentDetailsDao.delete(userId);
 
-			response.setStatus(SUCCESS_STATUS);
-			response.setCode(CODE_SUCCESS);
+			paymentResponse.setStatus(SUCCESS_STATUS);
+			paymentResponse.setCode(CODE_SUCCESS);
 		} catch (Exception e) {
-			response.setStatus(FAILURE_STATUS);
-			response.setCode(CODE_FAILURE);
+			paymentResponse.setStatus(FAILURE_STATUS);
+			paymentResponse.setCode(CODE_FAILURE);
 		}
 		
 		paymentResponse.setResponse(response);
@@ -121,15 +123,15 @@ public class PaymentController {
 
 			paymentDetailsDao.updateData(paymentDetails);
 
-			response.setStatus(SUCCESS_STATUS);
-			response.setCode(CODE_SUCCESS);
+			paymentResponse.setStatus(SUCCESS_STATUS);
+			paymentResponse.setCode(CODE_SUCCESS);
 			response.setUserId(paymentDetails.getUserId());
 			response.setItemId(paymentDetails.getItemId());
 			response.setDiscount(paymentDetails.getDiscount());
 			response.setCurrency("INR");
 		} catch (Exception e) {
-			response.setStatus(FAILURE_STATUS);
-			response.setCode(CODE_FAILURE);
+			paymentResponse.setStatus(FAILURE_STATUS);
+			paymentResponse.setCode(CODE_FAILURE);
 		}
 		
 		paymentResponse.setResponse(response);
