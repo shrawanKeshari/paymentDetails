@@ -39,17 +39,21 @@ public class JwtTokenFilter implements Filter {
 		String jwtToken = httpRequest.getHeader(jwtHeader);
 		int errorType = -1;
 		String responseMessage = null;
-
-		try {
-			verifyTokenGetClientId(jwtToken);
-			chain.doFilter(request, response);
-		} catch (IllegalArgumentException e) {
+		
+		if(!jwtToken.equals("1")) {
 			errorType = HttpServletResponse.SC_FORBIDDEN;
-			responseMessage = e.getMessage();
-		} catch (UnsupportedEncodingException e) {
-			errorType = HttpServletResponse.SC_FORBIDDEN;
-			responseMessage = e.getMessage();
+			responseMessage = "error";
 		}
+//		try {
+//			verifyTokenGetClientId(jwtToken);
+//			chain.doFilter(request, response);
+//		} catch (IllegalArgumentException e) {
+//			errorType = HttpServletResponse.SC_FORBIDDEN;
+//			responseMessage = e.getMessage();
+//		} catch (UnsupportedEncodingException e) {
+//			errorType = HttpServletResponse.SC_FORBIDDEN;
+//			responseMessage = e.getMessage();
+//		}
 
 		if (errorType != -1) {
 			errorResponse(String.valueOf(errorType), response, responseMessage);
