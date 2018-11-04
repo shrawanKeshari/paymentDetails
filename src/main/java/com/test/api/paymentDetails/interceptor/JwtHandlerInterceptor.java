@@ -1,4 +1,4 @@
-package com.test.api.paymentDetails.filters;
+package com.test.api.paymentDetails.interceptor;
 
 import java.io.IOException;
 
