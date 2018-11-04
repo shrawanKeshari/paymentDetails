@@ -1,6 +1,7 @@
 package com.test.api.paymentDetails.controller;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.api.paymentDetails.beans.PaymentDetails;
 import com.test.api.paymentDetails.dao.detailsDao;
+import com.test.api.paymentDetails.interceptor.JwtHandlerInterceptor;
 import com.test.api.paymentDetails.pojo.PaymentRequest;
 import com.test.api.paymentDetails.pojo.PaymentResponse;
 import com.test.api.paymentDetails.pojo.PaymentResponse.Response;
@@ -26,12 +28,16 @@ public class PaymentController {
 	private static final String FAILURE_STATUS = "FAILURE";
 	private static final String CODE_FAILURE = "101";
 	private static final String CODE_SUCCESS = "100";
+	
+	private static final Logger LOGGER = Logger.getLogger(PaymentController.class);
 
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
 	public @ResponseBody PaymentResponse pay(@RequestBody PaymentRequest request) {
 		PaymentResponse paymentResponse = new PaymentResponse();
 		
 		Response response = new Response();
+		
+		LOGGER.debug("Into the pay method");
 		
 		int userId = request.getRequest().getUserId();
 		String itemId =request.getRequest().getItemId();
@@ -59,6 +65,8 @@ public class PaymentController {
 		PaymentResponse paymentResponse = new PaymentResponse();
 		
 		Response response = new Response();
+		
+		LOGGER.debug("Into the addItem method");
 		
 		try {
 
@@ -92,6 +100,8 @@ public class PaymentController {
 
 		Response response = new Response();
 		
+		LOGGER.debug("Into the deleteItem method");
+		
 		try {
 			paymentDetailsDao.delete(userId);
 
@@ -112,6 +122,8 @@ public class PaymentController {
 		PaymentResponse paymentResponse = new PaymentResponse();
 		
 		Response response = new Response();
+		
+		LOGGER.debug("Into the updateItem method");
 
 		try {
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,13 +21,16 @@ public class JwtHandlerInterceptor implements HandlerInterceptor {
 //	private static final String jwtSceretKey = "1234567898876543234569877";
 //	private final long jwtWindow = 1000 * 60 * 5;
 	private static final String jwtHeader = "jwtToken";
-
+	
+	private static final Logger LOGGER = Logger.getLogger(JwtHandlerInterceptor.class);
+	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String jwtToken = request.getHeader(jwtHeader);
 		int errorType = -1;
 		String responseMessage = null;
 
+		LOGGER.debug("Into the pre handler method");
 		System.out.println("Into the pre handler method");
 
 		try {
@@ -62,6 +66,7 @@ public class JwtHandlerInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
+		LOGGER.debug("Into the post handler method");
 		System.out.println("into post handler");
 
 	}
@@ -69,6 +74,7 @@ public class JwtHandlerInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
+		LOGGER.debug("Into the completion method");
 		System.out.println("into completion");
 
 	}
