@@ -6,26 +6,6 @@
 
 	<display-name>Archetype Created Web Application</display-name>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
-	</context-param>
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<filter>
-		<display-name>JwtTokenFilter</display-name>
-		<filter-name>JwtTokenFilter</filter-name>
-		<filter-class>com.test.api.paymentDetails.filters.JwtTokenFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>JwtTokenFilter</filter-name>
-		<url-pattern>/rest/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
-
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -36,5 +16,14 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
 </web-app>

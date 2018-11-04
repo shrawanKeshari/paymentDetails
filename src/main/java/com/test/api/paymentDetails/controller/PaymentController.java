@@ -1,6 +1,5 @@
 package com.test.api.paymentDetails.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,13 +28,13 @@ public class PaymentController {
 	private static final String CODE_SUCCESS = "100";
 
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	public @ResponseBody PaymentResponse pay(HttpServletRequest request) {
+	public @ResponseBody PaymentResponse pay(@RequestBody PaymentRequest request) {
 		PaymentResponse paymentResponse = new PaymentResponse();
 		
 		Response response = new Response();
 		
-		int userId = ((PaymentRequest) request).getRequest().getUserId();
-		String itemId = ((PaymentRequest) request).getRequest().getItemId();
+		int userId = request.getRequest().getUserId();
+		String itemId =request.getRequest().getItemId();
 		try {
 			PaymentDetails paymentDetails = paymentDetailsDao.getItemIdUSerId(userId, itemId);
 

@@ -1,7 +1,14 @@
 package com.test.api.paymentDetails.pojo;
 
-public class PaymentResponse {
+import java.io.Serializable;
 
+public class PaymentResponse implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6740636175173304294L;
+	
 	private Response response;
 	private String status;
 	private String code;

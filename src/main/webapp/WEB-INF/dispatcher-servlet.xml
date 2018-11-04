@@ -32,5 +32,9 @@
 	</bean>
 
 	<mvc:annotation-driven />
+	
+	<mvc:interceptors>
+      <bean class="com.test.api.paymentDetails.filters.JwtHandlerInterceptor" />
+	</mvc:interceptors>
 
 </beans>
