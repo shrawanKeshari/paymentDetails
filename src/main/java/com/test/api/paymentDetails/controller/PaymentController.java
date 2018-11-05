@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.api.paymentDetails.beans.PaymentDetails;
 import com.test.api.paymentDetails.dao.detailsDao;
-import com.test.api.paymentDetails.interceptor.JwtHandlerInterceptor;
 import com.test.api.paymentDetails.pojo.PaymentRequest;
 import com.test.api.paymentDetails.pojo.PaymentResponse;
 import com.test.api.paymentDetails.pojo.PaymentResponse.Response;
@@ -37,7 +36,7 @@ public class PaymentController {
 		
 		Response response = new Response();
 		
-		LOGGER.debug("Into the pay method");
+		LOGGER.info("Into the pay method");
 		
 		int userId = request.getRequest().getUserId();
 		String itemId =request.getRequest().getItemId();
@@ -66,7 +65,7 @@ public class PaymentController {
 		
 		Response response = new Response();
 		
-		LOGGER.debug("Into the addItem method");
+		LOGGER.info("Into the addItem method");
 		
 		try {
 
@@ -100,7 +99,7 @@ public class PaymentController {
 
 		Response response = new Response();
 		
-		LOGGER.debug("Into the deleteItem method");
+		LOGGER.info("Into the deleteItem method");
 		
 		try {
 			paymentDetailsDao.delete(userId);
@@ -123,7 +122,7 @@ public class PaymentController {
 		
 		Response response = new Response();
 		
-		LOGGER.debug("Into the updateItem method");
+		LOGGER.info("Into the updateItem method");
 
 		try {
 

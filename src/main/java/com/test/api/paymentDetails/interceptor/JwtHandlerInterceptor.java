@@ -30,7 +30,7 @@ public class JwtHandlerInterceptor implements HandlerInterceptor {
 		int errorType = -1;
 		String responseMessage = null;
 
-		LOGGER.debug("Into the pre handler method");
+		LOGGER.info("Into the pre handler method");
 		System.out.println("Into the pre handler method");
 
 		try {
@@ -66,7 +66,7 @@ public class JwtHandlerInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		LOGGER.debug("Into the post handler method");
+		LOGGER.info("Into the post handler method");
 		System.out.println("into post handler");
 
 	}
@@ -74,7 +74,7 @@ public class JwtHandlerInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		LOGGER.debug("Into the completion method");
+		LOGGER.info("Into the completion method");
 		System.out.println("into completion");
 
 	}
