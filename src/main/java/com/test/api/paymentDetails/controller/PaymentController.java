@@ -52,6 +52,7 @@ public class PaymentController {
 		} catch (Exception e) {
 			paymentResponse.setStatus(FAILURE_STATUS);
 			paymentResponse.setCode(CODE_FAILURE);
+			LOGGER.error(e.getMessage());
 		}
 		
 		paymentResponse.setResponse(response);
@@ -86,6 +87,7 @@ public class PaymentController {
 		} catch (Exception e) {
 			paymentResponse.setStatus(FAILURE_STATUS);
 			paymentResponse.setCode(CODE_FAILURE);
+			LOGGER.error(e.getMessage());
 		}
 		
 		paymentResponse.setResponse(response);
@@ -109,6 +111,7 @@ public class PaymentController {
 		} catch (Exception e) {
 			paymentResponse.setStatus(FAILURE_STATUS);
 			paymentResponse.setCode(CODE_FAILURE);
+			LOGGER.error(e.getMessage());
 		}
 		
 		paymentResponse.setResponse(response);
@@ -142,6 +145,7 @@ public class PaymentController {
 		} catch (Exception e) {
 			paymentResponse.setStatus(FAILURE_STATUS);
 			paymentResponse.setCode(CODE_FAILURE);
+			LOGGER.error(e.getMessage());
 		}
 		
 		paymentResponse.setResponse(response);
