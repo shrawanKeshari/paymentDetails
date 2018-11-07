@@ -1,0 +1,1 @@
+This the REST API project using Spring framework. Currently having four API, first one is for adding new item in database, second one is calculating price of Item, third one is for updating price of Item and fourth one is for deleting item from database.
