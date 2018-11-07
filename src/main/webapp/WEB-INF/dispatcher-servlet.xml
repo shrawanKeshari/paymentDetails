@@ -26,15 +26,21 @@
 		<property name="dataSource" ref="ds"></property>
 	</bean>
 
-	<bean id="dao"
-		class="com.test.api.paymentDetails.dao.detailsDao">
+	<bean id="dao" class="com.test.api.paymentDetails.dao.detailsDao">
 		<property name="template" ref="jt"></property>
 	</bean>
 
 	<mvc:annotation-driven />
-	
+
+	<!-- interceptors for all REST path -->
 	<mvc:interceptors>
-      <bean class="com.test.api.paymentDetails.interceptor.JwtHandlerInterceptor" />
+		<bean
+			class="com.test.api.paymentDetails.interceptor.JwtHandlerInterceptor" />
 	</mvc:interceptors>
+
+	<!-- interceptors for specific REST path -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/payment/pay" 
+		/> <bean class="com.test.api.paymentDetails.interceptor.JwtHandlerInterceptor" 
+		/> </mvc:interceptor> </mvc:interceptors> -->
 
 </beans>
