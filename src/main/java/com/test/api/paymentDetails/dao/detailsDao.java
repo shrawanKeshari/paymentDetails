@@ -54,7 +54,7 @@ public class detailsDao {
 				paymentDetails.setItemId(rs.getString(3));
 				paymentDetails.setDiscount(rs.getDouble(4));
 				paymentDetails.setCurrency(rs.getString(5));
-				return null;
+				return paymentDetails;
 			}
 
 		});
